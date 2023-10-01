@@ -29,6 +29,7 @@ function onRender(data) {
   refs.breedSelect.append(...options);
   selectStyled();
   refs.loader.classList.remove('loader-is-visible');
+  refs.breedSelect.classList.remove('is-visible');
 }
 
 function selectStyled() {
@@ -37,10 +38,13 @@ function selectStyled() {
   });
 }
 
+
 refs.breedSelect.addEventListener('change', onChange);
+
 
 function onChange(e) {
   refs.loader.classList.add('loader-is-visible');
+  refs.catInfo.classList.replace('cat-info', 'is-visible');
   const option = e.currentTarget;
   const selectedOption = option.value;
 
@@ -49,12 +53,14 @@ function onChange(e) {
     .then(res => {
       refs.catInfo.innerHTML = createMarkup(res);
       refs.loader.classList.remove('loader-is-visible');
+      refs.catInfo.classList.replace('is-visible', 'cat-info');
     })
     .catch(onError);
 }
 
 function onError() {
   refs.loader.classList.remove('loader-is-visible');
+  refs.breedSelect.classList.add('is-visible');
   Notiflix.Notify.failure(
     'Oops! Something went wrong! Try reloading the page!'
   );

@@ -29,6 +29,10 @@ body {
   display: inline-block;
 }
 
+.is-visible{
+display: none;
+}
+
 img {
   max-width: 1600px;
   height: auto;
